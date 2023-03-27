@@ -1,17 +1,22 @@
 import React from 'react'
-import logo from '../assets/images/shopLogo.png'
+import BannerFlowers from './components/BannerFlowers'
+import Header from './components/Header'
+
+const FlowersOffers: React.FC = () => {
+    return (
+        <div className='w-10/12 mx-auto'>
+            <div className='text-slate-50'>Offers</div>
+        </div>
+    )
+}
 
 const HomePage: React.FC = () => {
     return (
-        <>
-            <img
-              className="mx-5 mb-2 float-left rounded-full"
-              width={'100px'}
-              src={logo}
-              alt={'flower logo'}
-            />
-            <div>Home Page</div>
-        </>
+        <div className='h-screen bg-black'>
+            <Header/>
+            <BannerFlowers/>
+            <FlowersOffers/>
+        </div>
     )
 }
 
