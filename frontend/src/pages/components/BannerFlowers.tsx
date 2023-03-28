@@ -7,16 +7,16 @@ const BannerFlowers: React.FC = () => {
     }
 
     return (
-      <div className='container'>
-        <div className='h-3/6 w-full mx-auto pt-14 px-20 mb-12 relative'>
+      <div className='relative m-0'>
+        <div className='h-3/6 mb-14 mx-auto pt-24'>
           <img 
-              className='absolute top-0 left-0 w-2/4'
-              style={{ maxWidth: '45%'}}
+              className='absolute top-0'
+              style= {{width: undefined, height: '120%'}}
               src={bannerImage}
               alt={'flowers'}
           />
-          <div className='rounded-lg flex m-auto' style={divStyle}>
-            <div className='text-slate-50 my-auto py-28 mr-40 ml-auto'>
+          <div className='top-10 rounded-lg flex m-auto w-11/12' style={divStyle}>
+            <div className='text-slate-50 my-auto py-40 mr-40 ml-auto'>
                 <p className='font-medium text-4xl leading-10'>Unrivaled choice</p>
                 <span className='font-normal text-xs leading-4'>Feel cared for with selected flowers</span>
             </div>

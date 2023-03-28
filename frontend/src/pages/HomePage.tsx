@@ -12,7 +12,7 @@ const FlowersOffers: React.FC = () => {
 
 const HomePage: React.FC = () => {
     return (
-        <div className='h-screen bg-black'>
+        <div className='bg-black h-screen min-h-screen h-max'>
             <Header/>
             <BannerFlowers/>
             <FlowersOffers/>
