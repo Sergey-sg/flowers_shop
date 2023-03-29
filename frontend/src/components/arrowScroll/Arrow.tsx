@@ -14,7 +14,7 @@ function Arrow({
   return (
     <button
       disabled={disabled}
-      className="text-[#E1E1E6] p-3 text-3xl"
+      className="text-[#E1E1E6] text-3xl py-2 px-3 hover:text-cyan-500"
       onClick={onClick}
       style={{
         cursor: "pointer",

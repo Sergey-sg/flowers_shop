@@ -16,7 +16,7 @@ const BannerFlowers: React.FC = () => {
           alt={"flowers"}
         />
         <div className="top-10 rounded-lg flex m-auto w-11/12" style={divStyle}>
-          <div className="text-slate-50 my-auto py-40 mr-40 ml-auto">
+          <div className="text-[#E1E1E6] my-auto py-40 mr-40 ml-auto">
             <p className="font-medium text-4xl leading-10">Unrivaled choice</p>
             <span className="font-normal text-xs leading-4">
               Feel cared for with selected flowers

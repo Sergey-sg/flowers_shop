@@ -1,17 +1,16 @@
 import React from "react";
-import ArrowScroll from "../components/arrowScroll/ArrowScroll";
 import BannerFlowers from "../components/BannerFlowers";
-import FlowersOffers from "../components/FlowersOffers";
-import Header from "../components/Header";
+import { CategoriesPresentationWithScroll } from "../components/CategoriesPresentationWithScroll";
 
 const HomePage: React.FC = () => {
   return (
-    <div className="bg-black h-screen min-h-screen h-full">
-      <Header />
+    <div>
       <BannerFlowers />
       <br />
-      <FlowersOffers />
-      <br />
+      <CategoriesPresentationWithScroll categories={["Flower suggestions"]} />
+      <CategoriesPresentationWithScroll
+        categories={["Ready for drop off", "Flower seeds"]}
+      />
     </div>
   );
 };
