@@ -1,5 +1,5 @@
 import React from 'react'
-import bannerImage from '../../assets/images/bannerFlowers.png'
+import bannerImage from '../assets/images/bannerFlowers.png'
 
 const BannerFlowers: React.FC = () => {
     const divStyle = {

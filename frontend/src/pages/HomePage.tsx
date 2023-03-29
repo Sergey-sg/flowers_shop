@@ -1,11 +1,12 @@
 import React from 'react'
-import BannerFlowers from './components/BannerFlowers'
-import FlowersOffers from './components/FlowersOffers'
-import Header from './components/Header'
+import ArrowScroll from '../components/ArrowScroll'
+import BannerFlowers from '../components/BannerFlowers'
+import FlowersOffers from '../components/FlowersOffers'
+import Header from '../components/Header'
 
 const HomePage: React.FC = () => {
     return (
-        <div className='bg-black h-screen min-h-screen h-max'>
+        <div className='bg-black h-screen min-h-screen h-full'>
             <Header/>
             <BannerFlowers/>
             <br/>
