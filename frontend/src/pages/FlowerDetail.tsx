@@ -18,7 +18,12 @@ export function FlowerDetail() {
         &lt; back
       </div>
       <div className="flex">
-        <img src={productImage} width="25%" className="ml-8 mr-20" />
+        <img 
+          src={productImage} 
+          alt={flower.name}
+          width="25%" 
+          className="ml-8 mr-20" 
+        />
         <div className="text-[#E1E1E6] max-w-4xl my-auto">
           <p className="font-medium text-4xl leading-snug">{flower.name}</p>
           <br />
