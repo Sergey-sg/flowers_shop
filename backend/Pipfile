@@ -12,6 +12,11 @@ django-rosetta = "*"
 djangorestframework = "*"
 django-cors-headers = "*"
 django-filter = "*"
+python-slugify = "*"
+celery = "*"
+redis = "*"
+django-utils-six = "*"
+pillow = "*"
 
 [dev-packages]
 
