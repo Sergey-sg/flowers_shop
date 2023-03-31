@@ -17,6 +17,7 @@ celery = "*"
 redis = "*"
 django-utils-six = "*"
 pillow = "*"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
 

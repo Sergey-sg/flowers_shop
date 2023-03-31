@@ -5,6 +5,43 @@ from django.utils.translation import gettext_lazy as _
 from shared.mixins.model_utils import CreatedUpdateMixins, ImageNameMixins, SlugImageSaveMixin
 
 
+class Category(CreatedUpdateMixins, SlugImageSaveMixin):
+    """
+    Category model
+    attributes:
+        name (str): name of category
+        slug (str): used to generate URL
+        created (datetime): data of create category
+        updated (datetime): data of update category
+    """
+    name = models.CharField(
+        max_length=200,
+        unique=True,
+        validators=[MinLengthValidator(3)],
+        verbose_name=_('name'),
+        help_text=_('category name')
+    )
+    slug = models.SlugField(
+        unique=True,
+        help_text=_('used to generate URL'),
+        blank=True
+    )
+
+    class Meta(object):
+        verbose_name = _('category')
+        verbose_name_plural = _('Categories')
+        ordering = ['-created']
+
+    def __str__(self) -> str:
+        """class method returns the category in string representation"""
+        return self.name
+
+    def save(self, *args, **kwargs) -> None:
+        """if the slug is not created then it is created from the name of the category"""
+        self.save_slug()
+        super(Category, self).save(*args, **kwargs)
+
+
 class Product(CreatedUpdateMixins, ImageNameMixins, SlugImageSaveMixin):
     """
     Product model
@@ -20,6 +57,11 @@ class Product(CreatedUpdateMixins, ImageNameMixins, SlugImageSaveMixin):
         created (datetime): data of create product
         updated (datetime): data of update product
     """
+    category = models.ManyToManyField(
+        Category,
+        verbose_name=_('category'),
+        help_text=_('categories for product')
+    )
     name = models.CharField(
         max_length=250,
         validators=[MinLengthValidator(3)],
@@ -36,11 +78,9 @@ class Product(CreatedUpdateMixins, ImageNameMixins, SlugImageSaveMixin):
         help_text=_('product description'),
         blank=True
     )
-    price = models.DecimalField(
+    price = models.PositiveIntegerField(
         verbose_name=_('price'),
-        help_text=_('the price of the product'),
-        max_digits=10,
-        decimal_places=2
+        help_text=_('the price of the product in coins'),
     )
     image = models.ImageField(
         upload_to='product/%Y/%m/%d',
@@ -55,7 +95,7 @@ class Product(CreatedUpdateMixins, ImageNameMixins, SlugImageSaveMixin):
         verbose_name=_('image alternative'),
         help_text=_('text to be loaded in case of image loss')
     )
-    stock = models.IntegerField(
+    stock = models.PositiveIntegerField(
         verbose_name=_('stock'),
         help_text=_('product quantity in stock'),
         blank=True,

@@ -49,3 +49,6 @@ class SlugImageSaveMixin:
                 self.image.name = field_name_image['image_name']
             if not self.img_alt and self.image:
                 self.img_alt = self.name
+
+    def save_slug(self):
+        self.slug = slugify(self.slug or self.name)
