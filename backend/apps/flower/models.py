@@ -106,6 +106,12 @@ class Product(CreatedUpdateMixins, ImageNameMixins, SlugImageSaveMixin):
         help_text=_('available product or not'),
         default=True
     )
+    number_of_sold = models.PositiveIntegerField(
+        verbose_name=_('number of sold'),
+        help_text=_('the number of sold products'),
+        default=0
+    )
+
 
     class Meta(object):
         verbose_name = _('product')

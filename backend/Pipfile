@@ -6,7 +6,6 @@ name = "pypi"
 [packages]
 django = "*"
 django-environ = "*"
-django-debug-toolbar = "*"
 django-modeltranslation = "*"
 django-rosetta = "*"
 djangorestframework = "*"
@@ -20,6 +19,7 @@ pillow = "*"
 djangorestframework-simplejwt = "*"
 
 [dev-packages]
+django-debug-toolbar = "*"
 
 [requires]
 python_version = "3.10"
