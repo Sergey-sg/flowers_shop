@@ -8,7 +8,7 @@ class ProductFilter(filters.FilterSet):
 
     class Meta:
         model = Product
-        fields = ('category', 'name',)
+        fields = ('category__slug', 'name',)
 
     @staticmethod
     def filter_category(queryset, name, value):

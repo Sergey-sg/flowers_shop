@@ -9,4 +9,4 @@ class RecommendationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Recommendation
-        fields = ('pk', 'name', 'active', 'product')
+        fields = ('pk', 'name', 'product')

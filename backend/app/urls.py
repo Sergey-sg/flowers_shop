@@ -18,16 +18,24 @@ from django.contrib import admin
 from django.urls import include, path, re_path
 from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
+    path('api/', include([
+        path('auth/', include([
+            path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+            path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+        ])),
+    ])),
 ]
 
 urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
-    path('shop/', include([
-        path('', include('apps.flower.urls')),
-        path('recommendations/', include('apps.recommendation.urls')),
+    path('api/', include([
+        path('shop/', include([
+            path('', include('apps.flower.urls')),
+            path('recommendations/', include('apps.recommendation.urls')),
+        ])),
     ])),
 )
 

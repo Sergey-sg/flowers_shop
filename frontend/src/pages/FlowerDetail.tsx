@@ -3,14 +3,6 @@ import { IFlowerItem } from "../interfaces/IFlowerItem.interface";
 import productImage from "../assets/images/testProduct.png";
 import ToCartButton from "../components/ToCartButton";
 
-const flower: IFlowerItem = {
-  id: 1,
-  name: "Name of flower",
-  detail:
-    "Performed suspicion in certainty so frankness by attention pretended. Newspaper or in tolerably education enjoyment. Extremity excellent certainty discourse sincerity no he so resembled. Joy house worse arise total boy but.",
-  price: 79.5,
-};
-
 export function FlowerDetail() {
   return (
     <div className="w-11/12 mx-auto">
@@ -18,7 +10,7 @@ export function FlowerDetail() {
         &lt; back
       </div>
       <div className="flex">
-        <img 
+        {/* <img 
           src={productImage} 
           alt={flower.name}
           width="25%" 
@@ -34,7 +26,7 @@ export function FlowerDetail() {
           </p>
           <br />
           <ToCartButton />
-        </div>
+        </div> */}
       </div>
     </div>
   );

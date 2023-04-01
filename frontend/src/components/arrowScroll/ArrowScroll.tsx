@@ -36,8 +36,8 @@ function ArrowScroll(props: { items: IFlowerItem[] }) {
             RightArrow={RightArrow}
             onWheel={onWheel}
           >
-            {props.items?.map((item: IFlowerItem) => (
-              <FlowerCard flower={item} />
+            {props.items?.map((item) => (
+              <FlowerCard key={item.pk} flower={item} />
             ))}
           </ScrollMenu>
         </div>
