@@ -12,6 +12,7 @@ class Recommendation(CreatedUpdateMixins):
     attributes:
         name (str): name of recommendation
         active (bool): active recommendation or not
+        product (class Product): communication with the Product model
         created (datetime): data of create recommendation
         updated (datetime): data of update recommendation
     """

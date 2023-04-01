@@ -12,6 +12,9 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug', 'price', 'stock', 'available')
+    list_display = ('name', 'slug', 'price', 'stock',
+                    'number_of_sold', 'available')
+    readonly_fields = ('number_of_sold',)
     search_fields = ('name',)
     list_filter = ('created', 'available',)
+    ordering = ('-created', 'number_of_sold',)

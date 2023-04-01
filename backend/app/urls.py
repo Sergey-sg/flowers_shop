@@ -25,7 +25,10 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
-    path('shop/', include('apps.flower.urls')),
+    path('shop/', include([
+        path('', include('apps.flower.urls')),
+        path('recommendations/', include('apps.recommendation.urls')),
+    ])),
 )
 
 if 'rosetta' in settings.INSTALLED_APPS:

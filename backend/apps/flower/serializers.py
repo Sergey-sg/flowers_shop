@@ -15,7 +15,7 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         lookup_field = 'slug'
         fields = ('url', 'pk', 'slug', 'category', 'name', 'description',
-                  'price', 'image', 'img_alt', 'stock', 'available', 'created', 'updated',)
+                  'price', 'image', 'img_alt', 'stock', 'available',)
         extra_kwargs = {
             'url': {'lookup_field': 'slug'}
         }

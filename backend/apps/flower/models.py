@@ -46,14 +46,16 @@ class Product(CreatedUpdateMixins, ImageNameMixins, SlugImageSaveMixin):
     """
     Product model
     attributes:
+        category (class Category): communication with the Category model
         name (str): name of product
         slug (str): used to generate URL
         description (str): product description
-        price (float): the price of the product
+        price (int): the price of the product
         image (img): product image
         img_alt (str): text to be loaded in case of image loss
         stock (int): product quantity in stock
         available (bool): available product or not
+        number_of_sold (int): the number of sold products
         created (datetime): data of create product
         updated (datetime): data of update product
     """
@@ -111,7 +113,6 @@ class Product(CreatedUpdateMixins, ImageNameMixins, SlugImageSaveMixin):
         help_text=_('the number of sold products'),
         default=0
     )
-
 
     class Meta(object):
         verbose_name = _('product')
