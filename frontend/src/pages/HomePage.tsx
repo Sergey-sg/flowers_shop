@@ -8,8 +8,8 @@ const HomePage: React.FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    console.log('start useEffect in HomePage');
-    
+    console.log("start useEffect in HomePage");
+
     dispatch(fetchRecommendations());
   }, []);
 

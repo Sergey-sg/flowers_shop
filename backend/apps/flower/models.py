@@ -76,6 +76,7 @@ class Product(CreatedUpdateMixins, ImageNameMixins, SlugImageSaveMixin):
         blank=True
     )
     description = models.TextField(
+        validators=[MinLengthValidator(100)],
         verbose_name=_('description'),
         help_text=_('product description'),
         blank=True

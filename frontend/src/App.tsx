@@ -12,11 +12,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route
-          // path=':categoryName/:flowerName'
-          path="category/flower"
-          element={<FlowerDetail />}
-        />
+        <Route path=":flowerSlug" element={<FlowerDetail />} />
       </Routes>
       <Footer />
     </div>

@@ -63,3 +63,25 @@ export const fetchAllFlowersForCategory = (slug: string) => {
     }
   };
 };
+
+export const fetchOneFlowerBySlug = (slug: string) => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      dispatch(resetError());
+      dispatch(startLoading());
+
+      const response = await getOneFlowerBySlug(slug);
+
+      dispatch(initialFlowers([response?.data]));
+      dispatch(successAction({ message: "Flower loaded successfully" }));
+    } catch (e) {
+      const axiosErr = e as AxiosError;
+      const status = axiosErr.response?.status;
+      const message = axiosErr.message;
+
+      dispatch(errorOccurred({ statusCode: status, message: message }));
+    } finally {
+      dispatch(stopLoading());
+    }
+  };
+};

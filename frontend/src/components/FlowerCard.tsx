@@ -6,9 +6,9 @@ import ToCartButton from "./ToCartButton";
 export function FlowerCard(props: { flower: IFlowerItem }) {
   return (
     <div className="container">
-      <div className="container text-[#E1E1E6] my-auto w-max text-center mx-10 w-10/12">
+      <div className="container text-[#E1E1E6] my-auto w-max text-center mx-10 max-w-xs esm:max-w-[180px]">
         <Link
-          to={"/category/flower"}
+          to={`/${props.flower.slug}`}
           className="text-[#FFFFFF] hover:text-cyan-500"
         >
           <img
