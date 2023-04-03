@@ -32,7 +32,7 @@ export function FlowerDetail() {
           <div className="text-[#E1E1E6] max-w-4xl my-auto">
             <p className="font-medium text-4xl leading-snug">{flower.name}</p>
             <br />
-            <p className="font-normal text-2xl leading-snug">{flower.description}</p>
+            <p className="font-normal text-2xl leading-snug text-justify">{flower.description}</p>
             <br />
             <div className="flex">
               <span className="text-[#82F3FF] font-normal text-3xl leading-relaxed mr-4">$ {flower.price}</span><ToCartButton />
