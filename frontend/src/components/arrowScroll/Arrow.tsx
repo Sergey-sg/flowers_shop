@@ -1,4 +1,5 @@
 import React from "react";
+import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import { VisibilityContext } from "react-horizontal-scrolling-menu";
 import "react-horizontal-scrolling-menu/dist/styles.css";
 
@@ -47,7 +48,7 @@ export function LeftArrow() {
 
   return (
     <Arrow disabled={disabled} onClick={() => scrollPrev()}>
-      &lt;
+      <MdArrowBackIos />
     </Arrow>
   );
 }
@@ -67,7 +68,7 @@ export function RightArrow() {
 
   return (
     <Arrow disabled={disabled} onClick={() => scrollNext()}>
-      &gt;
+      <MdArrowForwardIos />
     </Arrow>
   );
 }
