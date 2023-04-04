@@ -5,27 +5,28 @@ import ToCartButton from "./ToCartButton";
 
 export function FlowerCard(props: { flower: IFlowerItem }) {
   return (
-    <div>
-      <div className="text-[#E1E1E6] my-auto w-max text-center mx-4 max-w-xs esm:max-w-[180px]">
-        <Link
-          to={`/${props.flower.slug}`}
-          className="text-[#FFFFFF] hover:text-cyan-500"
-        >
-          <img
-            src={`${props.flower.image}`}
-            alt={props.flower.img_alt}
-            className="mx-auto max-h-[150px]"
-          />
-          <br />
-          <p className="font-bold text-2xl leading-snug">{props.flower.name}</p>
-        </Link>
-        <p className="font-normal text-sm leading-relaxed">
-          {props.flower.description.substring(0, 100)}
-          {props.flower.description.length > 100 ? " ..." : ""}
-        </p>
-        <p className="text-[#82F3FF] font-normal text-3xl leading-relaxed">
+    <div className="flex flex-col text-[#E1E1E6] w-max text-center mx-4 max-w-xs esm:max-w-[180px] h-full">
+      <Link
+        to={`/${props.flower.slug}`}
+        className="text-[#FFFFFF] hover:text-cyan-500"
+      >
+        <img
+          src={`${props.flower.image}`}
+          alt={props.flower.img_alt}
+          className="mx-auto max-h-[150px]"
+        />
+        <br />
+        <p className="font-bold text-2xl leading-snug">{props.flower.name}</p>
+      </Link>
+      <p className="font-normal text-sm leading-relaxed">
+        {props.flower.description.substring(0, 100)}
+        {props.flower.description.length > 100 ? " ..." : ""}
+      </p>
+      <div className="mx-4 mt-auto">
+        <span className="text-[#82F3FF] font-normal text-3xl leading-relaxed">
           $ {props.flower.price / 100}
-        </p>
+        </span>
+        <br />
         <ToCartButton />
       </div>
     </div>

@@ -13,10 +13,10 @@ export function FlowerDetail() {
   useEffect(() => {
     console.log("start useEffect in FlowerDetail page");
 
-    if (!flower) {
-      dispatch(fetchOneFlowerBySlug(flowerSlug || ''));
+    if (!flower && flowerSlug) {
+      dispatch(fetchOneFlowerBySlug(flowerSlug));
     }
-  }, []);
+  });
 
   return (
     <div className="w-10/12 mx-auto mb-14">
