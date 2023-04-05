@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/shopLogo.png";
+import MenuCategories from "./MenuCategories";
 
 const Header: React.FC = () => {
   return (
@@ -13,8 +14,9 @@ const Header: React.FC = () => {
             src={logo}
             alt={"flower logo"}
           />
-          <div className="mx-8 my-auto">flowers shop</div>
+          <div className="ml-8 my-auto">flowers shop</div>
         </Link>
+        <MenuCategories/>
         <input
           placeholder="Search your flower"
           type={"text"}

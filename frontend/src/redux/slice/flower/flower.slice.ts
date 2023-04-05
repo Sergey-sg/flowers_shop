@@ -14,10 +14,6 @@ const flowerSlice = createSlice({
       ...state,
       ...action.payload,
     ],
-    // addNewPageOfFlowers: (state, action: PayloadAction<IFlowerItem[]>) => [
-    //   ...state,
-    //   ...action.payload.filter((flower) => !state.includes(flower)),
-    // ],
   },
 });
 

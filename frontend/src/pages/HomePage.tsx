@@ -11,7 +11,7 @@ const HomePage: React.FC = () => {
     console.log("start useEffect in HomePage");
 
     dispatch(fetchRecommendations());
-  }, []);
+  });
 
   return (
     <div>

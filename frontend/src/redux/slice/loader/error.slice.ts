@@ -1,17 +1,17 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IError {
-  statusCode: number | string | undefined
-  message: string
+  statusCode: number | string | undefined;
+  message: string;
 }
 
 const initialState: IError = {
-  statusCode: '',
-  message: '',
-}
+  statusCode: "",
+  message: "",
+};
 
 const errorSlice = createSlice({
-  name: 'error',
+  name: "error",
   initialState,
   reducers: {
     errorOccurred: (_, action: PayloadAction<IError>) => ({
@@ -20,8 +20,8 @@ const errorSlice = createSlice({
     }),
     resetError: () => ({ ...initialState }),
   },
-})
+});
 
-export const { errorOccurred, resetError } = errorSlice.actions
+export const { errorOccurred, resetError } = errorSlice.actions;
 
-export default errorSlice.reducer
+export default errorSlice.reducer;

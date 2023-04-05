@@ -16,10 +16,7 @@ export const fetchAllCategories = () => {
       dispatch(startLoading());
       const response = await getAllCategories();
 
-      console.log(response.data);
-
-      dispatch(initialCategories(response.data.data));
-      //   dispatch(setPagination(response.data.meta))
+      dispatch(initialCategories(response.data.results));
     } catch (e) {
       const axiosErr = e as AxiosError;
       const status = axiosErr.response?.status;

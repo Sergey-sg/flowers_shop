@@ -21,7 +21,7 @@ export function FlowerDetail() {
   return (
     <div className="w-10/12 mx-auto mb-14">
       <div className="pt-6 pb-2 px-4 text-2xl hover:text-cyan-500 font-bold leading-snug text-[#E1E1E6] mb-14 w-max">
-        <MdArrowBackIos className="float-left"/> back
+        <MdArrowBackIos className="float-left mt-1"/> back
       </div>
       { flower && 
         <div className="xl:flex">

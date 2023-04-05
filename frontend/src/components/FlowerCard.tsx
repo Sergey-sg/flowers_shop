@@ -5,7 +5,7 @@ import ToCartButton from "./ToCartButton";
 
 export function FlowerCard(props: { flower: IFlowerItem }) {
   return (
-    <div className="flex flex-col text-[#E1E1E6] w-max text-center mx-4 max-w-xs esm:max-w-[180px] h-full">
+    <div className="flex flex-col text-[#E1E1E6] w-max text-center mx-4 mb-12 max-w-xs esm:max-w-[180px] h-full">
       <Link
         to={`/${props.flower.slug}`}
         className="text-[#FFFFFF] hover:text-cyan-500"
