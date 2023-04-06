@@ -1,16 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = false
+const initialState = false;
 
 const loaderSlice = createSlice({
-  name: 'loader',
+  name: "loader",
   initialState,
   reducers: {
     startLoading: () => true,
     stopLoading: () => false,
   },
-})
+});
 
-export const { startLoading, stopLoading } = loaderSlice.actions
+export const { startLoading, stopLoading } = loaderSlice.actions;
 
-export default loaderSlice.reducer
+export default loaderSlice.reducer;

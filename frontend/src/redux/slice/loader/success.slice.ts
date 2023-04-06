@@ -1,11 +1,11 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {
-  message: '',
-}
+  message: "",
+};
 
 const successSlice = createSlice({
-  name: 'success',
+  name: "success",
   initialState,
   reducers: {
     successAction: (_, action: PayloadAction<{ message: string }>) => ({
@@ -13,8 +13,8 @@ const successSlice = createSlice({
     }),
     resetSuccess: () => ({ ...initialState }),
   },
-})
+});
 
-export const { successAction, resetSuccess } = successSlice.actions
+export const { successAction, resetSuccess } = successSlice.actions;
 
-export default successSlice.reducer
+export default successSlice.reducer;

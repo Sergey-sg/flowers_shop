@@ -16,7 +16,7 @@ const Header: React.FC = () => {
           />
           <div className="ml-8 my-auto">flowers shop</div>
         </Link>
-        <MenuCategories/>
+        <MenuCategories />
         <input
           placeholder="Search your flower"
           type={"text"}

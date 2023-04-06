@@ -7,7 +7,7 @@ import Footer from "./components/Footer";
 import { FlowerDetail } from "./pages/FlowerDetail";
 import FlowersCatalogPage from "./pages/FlowersCatalogPage";
 
-function App() {  
+function App() {
   return (
     <div className="flex flex-col min-h-screen bg-black">
       <Header />

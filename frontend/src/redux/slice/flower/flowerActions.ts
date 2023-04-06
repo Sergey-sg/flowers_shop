@@ -16,8 +16,8 @@ const getAllFlowers = () => {
 };
 
 const getNextPageOfFlowers = (url: string) => {
-  return api.get(url)
-}
+  return api.get(url);
+};
 
 const getAllFlowersByCategory = (slug: string) => {
   return api.get(`shop/flowers/?category__slug=${slug}`);

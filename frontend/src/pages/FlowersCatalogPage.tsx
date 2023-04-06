@@ -5,6 +5,7 @@ import {
   fetchNextPageOfFlowers,
 } from "../redux/slice/flower/flowerActions";
 import { FlowerCard } from "../components/FlowerCard";
+import FilterMenu from "../components/FilterMenu";
 
 const FlowersCatalogPage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -18,7 +19,7 @@ const FlowersCatalogPage: React.FC = () => {
     if (!flowers.length) {
       dispatch(fetchAllFlowers());
     }
-  });
+  }, [dispatch, flowers]);
 
   const loadNextPage = () => {
     if (pagination.next) {
@@ -28,6 +29,7 @@ const FlowersCatalogPage: React.FC = () => {
 
   return (
     <>
+      <FilterMenu />
       <div className="w-11/12 mx-auto mt-14 flex flex-wrap justify-center">
         {flowers?.map((flower) => (
           <FlowerCard key={flower.pk} flower={flower} />
@@ -35,7 +37,7 @@ const FlowersCatalogPage: React.FC = () => {
       </div>
       {pagination.next && (
         <button
-          // disabled={!loader}
+          disabled={loader}
           className="text-[#E1E1E6] hover:text-cyan-500 font-normal text-2xl leading-relaxed p-3 mb-8"
           onClick={loadNextPage}
         >
