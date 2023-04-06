@@ -16,10 +16,8 @@ const FlowersCatalogPage: React.FC = () => {
   useEffect(() => {
     console.log("start useEffect in AllFlowersPage");
 
-    if (!flowers.length) {
-      dispatch(fetchAllFlowers());
-    }
-  }, [dispatch, flowers]);
+    dispatch(fetchAllFlowers(''));
+  }, [dispatch]);
 
   const loadNextPage = () => {
     if (pagination.next) {
@@ -30,11 +28,17 @@ const FlowersCatalogPage: React.FC = () => {
   return (
     <>
       <FilterMenu />
-      <div className="w-11/12 mx-auto mt-14 flex flex-wrap justify-center">
-        {flowers?.map((flower) => (
-          <FlowerCard key={flower.pk} flower={flower} />
-        ))}
-      </div>
+      {!flowers.length ? (
+        <div className="m-auto text-3xl text-white">
+          Not see flowers, try change filters
+        </div>
+      ) : (
+        <div className="w-11/12 mx-auto mt-14 flex flex-wrap justify-center">
+          {flowers?.map((flower) => (
+            <FlowerCard key={flower.pk} flower={flower} />
+          ))}
+        </div>
+      )}
       {pagination.next && (
         <button
           disabled={loader}

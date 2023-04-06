@@ -11,27 +11,24 @@ const getOneFlowerBySlug = (slug: string) => {
   return api.get(`shop/flowers/${slug}/`);
 };
 
-const getAllFlowers = () => {
-  return api.get("shop/flowers/");
+const getAllFlowers = (searchParams: string) => {
+  return api.get(`shop/flowers/${'?' + searchParams || ''}`);
 };
 
 const getNextPageOfFlowers = (url: string) => {
   return api.get(url);
 };
 
-const getAllFlowersByCategory = (slug: string) => {
-  return api.get(`shop/flowers/?category__slug=${slug}`);
-};
-
-export const fetchAllFlowers = () => {
+export const fetchAllFlowers = (searchParams: string) => {
   return async (dispatch: AppDispatch) => {
     try {
       dispatch(resetError());
       dispatch(startLoading());
 
-      const response = await getAllFlowers();
+      const response = await getAllFlowers(searchParams);
 
       dispatch(initialFlowers(response?.data.results));
+      console.log(response.data)
       dispatch(
         setPagination({
           count: response?.data.count,
@@ -69,30 +66,6 @@ export const fetchNextPageOfFlowers = (url: string) => {
         })
       );
       dispatch(successAction({ message: "Flowers loaded successfully" }));
-    } catch (e) {
-      const axiosErr = e as AxiosError;
-      const status = axiosErr.response?.status;
-      const message = axiosErr.message;
-
-      dispatch(errorOccurred({ statusCode: status, message: message }));
-    } finally {
-      dispatch(stopLoading());
-    }
-  };
-};
-
-export const fetchAllFlowersForCategory = (slug: string) => {
-  return async (dispatch: AppDispatch) => {
-    try {
-      dispatch(resetError());
-      dispatch(startLoading());
-
-      const response = await getAllFlowersByCategory(slug);
-
-      dispatch(initialFlowers(response?.data.results));
-      dispatch(
-        successAction({ message: "Flowers by category loaded successfully" })
-      );
     } catch (e) {
       const axiosErr = e as AxiosError;
       const status = axiosErr.response?.status;

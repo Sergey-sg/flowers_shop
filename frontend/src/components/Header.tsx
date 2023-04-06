@@ -23,7 +23,7 @@ const Header: React.FC = () => {
           name="searchFlower"
           className="block w-8/12 my-auto text-[#E1E1E6] bg-[#0D1D25] border border-none rounded-3xl py-4 px-9 focus:outline-none focus:border-slate-400 focus:ring-slate-400 focus:ring-1 sm:text-sm"
         />
-        <button className="mx-8 bg-red-700 hover:bg-red-800 w-1/6 rounded-3xl">
+        <button className="mx-8 my-auto bg-red-700 hover:bg-red-800 rounded-xl py-3 px-4">
           Cart
         </button>
       </div>

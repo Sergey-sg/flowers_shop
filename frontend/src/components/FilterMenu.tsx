@@ -1,80 +1,18 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { MdClose, MdOutlineFilterList, MdArrowDropDown } from "react-icons/md";
-import { useAppSelector } from "../redux/hooks";
+import { MdClose, MdOutlineFilterList } from "react-icons/md";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import queryString from "query-string";
 import { useLocation, useSearchParams } from "react-router-dom";
-
-const DropDownList = (props: {
-  menuName: string;
-  elems: any[];
-  changeFunc: any;
-}) => {
-  const [showDropDown, setShowDropDown] = useState(false);
-  const [params, setParams] = useState<string[]>([]);
-
-  const checkElem = useCallback(
-    (elem: string, checked: boolean) => {
-      let outParams = [];
-      if (checked) {
-        outParams = [...params, elem];
-      } else {
-        outParams = params.filter((param) => param !== elem);
-      }
-
-      setParams(outParams);
-      props.changeFunc(outParams);
-    },
-    [params]
-  );
-
-  return (
-    <div className="flex flex-col items-center justify-center p-4">
-      <button
-        onClick={() => setShowDropDown(!showDropDown)}
-        className="text-[#E1E1E6] bg-[#033857] hover:bg-[#042a40] rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center mb-2"
-      >
-        Filter by {props.menuName}
-        <MdArrowDropDown />
-      </button>
-      {/* Dropdown menu */}
-      <div
-        className={`z-10 ${
-          showDropDown ? "" : "hidden"
-        } w-max p-4 bg-white rounded-lg shadow`}
-      >
-        <h6 className="mb-3 text-sm text-gray-900 dark:text-white">
-          {props.menuName.charAt(0).toUpperCase() + props.menuName.slice(1)}
-        </h6>
-        <ul className="space-y-2 text-sm" aria-labelledby="dropdownDefault">
-          {props.elems?.map((elem) => (
-            <li key={elem.pk} className="flex items-center">
-              <input
-                id={elem.slug}
-                type="checkbox"
-                onChange={(event) => checkElem(elem.slug, event.target.checked)}
-                className="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-              />
-              <label
-                htmlFor={elem.slug}
-                className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
-              >
-                {elem.name}
-              </label>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
-};
+import DropDownList from "./DropDownList";
+import { fetchAllFlowers } from "../redux/slice/flower/flowerActions";
 
 const FilterMenu: React.FC = () => {
   const [showSidebar, setShowSidebar] = useState(false);
-  const loader = useAppSelector((state) => state.loader);
   const [searchParams, setSearchParams] = useSearchParams();
   const categories = useAppSelector((state) => state.categories);
-  const queryParams = queryString.parse(useLocation().search);
   const filterMenuRef = useRef<HTMLDivElement>(null);
+  const [filterParams, setFilterParams] = useState(queryString.parse(useLocation().search));
+  const dispatch = useAppDispatch();
 
   const handleClickOutside = (event: any) => {
     if (
@@ -95,16 +33,24 @@ const FilterMenu: React.FC = () => {
 
   const setCategory = useCallback(
     (params: string[]) => {
-      setSearchParams(queryString.stringify({ category: params }));
+      setFilterParams({ category: params });
     },
-    [queryParams, searchParams]
+    [setSearchParams]
   );
+
+  const submitFilters = () => {
+    if (filterParams) {
+      const newSearchParams = queryString.stringify(filterParams);
+      setSearchParams(newSearchParams);
+      dispatch(fetchAllFlowers(newSearchParams));
+    }
+  };
 
   return (
     <>
       <button
         onClick={() => setShowSidebar(!showSidebar)}
-        className="border border-sky-300 bg-[#00111A] hover:bg-[#0D1D25] rounded-xl text-[#E1E1E6] px-4 pt-4 pb-3.5 my-4 mr-8 ml-auto w-max"
+        className="bg-[#033857] hover:bg-[#042a40] rounded-xl text-[#E1E1E6] p-4 my-4 mr-8 ml-auto w-max"
       >
         <div className="flex justify-center">
           <MdOutlineFilterList size={20} />
@@ -129,13 +75,14 @@ const FilterMenu: React.FC = () => {
             menuName="categories"
             elems={categories}
             changeFunc={setCategory}
+            values={filterParams.category}
           />
-          {/* <button
+          <button
             className="text-[#E1E1E6] hover:text-cyan-500 w-max my-auto py-2 px-3"
-            onClick={() => setFilters()}
+            onClick={() => submitFilters()}
           >
             Submit
-          </button> */}
+          </button>
         </div>
       )}
     </>

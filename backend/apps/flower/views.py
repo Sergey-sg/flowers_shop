@@ -20,8 +20,10 @@ class ProductsListAPIView(generics.ListAPIView):
 
     def get_queryset(self):
         qs = super(ProductsListAPIView, self).get_queryset()
-        if 'filter_category' in self.request.GET and self.request.GET['filter_category']:
-            qs = qs.filter(category__slug=self.request.GET['filter_category'])
+        if 'category' in self.request.GET and self.request.GET['category']:
+            categories = self.request.GET.getlist('category')
+            for category in categories:
+                qs = qs.filter(category__slug=category)
         return qs
 
 
@@ -30,4 +32,3 @@ class ProductDetailAPIView(generics.RetrieveAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     lookup_field = 'slug'
-    
