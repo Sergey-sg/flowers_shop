@@ -18,14 +18,6 @@ class ProductsListAPIView(generics.ListAPIView):
     serializer_class = ProductSerializer
     filterset_class = ProductFilter
 
-    def get_queryset(self):
-        qs = super(ProductsListAPIView, self).get_queryset()
-        if 'category' in self.request.GET and self.request.GET['category']:
-            categories = self.request.GET.getlist('category')
-            for category in categories:
-                qs = qs.filter(category__slug=category)
-        return qs
-
 
 class ProductDetailAPIView(generics.RetrieveAPIView):
     permission_classes = (AllowAny,)
