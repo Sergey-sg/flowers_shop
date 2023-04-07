@@ -2,13 +2,18 @@ import React, { useEffect, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { fetchAllCategories } from "../redux/slice/category/categoryActions";
 import { MdMenu, MdClose } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const MenuCategories: React.FC = () => {
   const dispatch = useAppDispatch();
   const categories = useAppSelector((state) => state.categories);
   const [showCategories, setShowCategories] = useState(false);
   const MenuCategoriesRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
+
+  const isActiveLink = (path: string) => {
+    return location.pathname === path;
+  }
 
   const handleClickOutside = (event: any) => {
     if (
@@ -20,7 +25,7 @@ const MenuCategories: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log('in useEffect ref categories')
+    console.log("in useEffect ref categories");
 
     document.addEventListener("mousedown", handleClickOutside);
 
@@ -46,7 +51,7 @@ const MenuCategories: React.FC = () => {
         <MdMenu />
       </button>
       {showCategories && (
-        <div 
+        <div
           ref={MenuCategoriesRef}
           className={`p-4 fixed top-0 left-0 h-screen w-2/12 min-w-max pl-10 text-white z-50 ease-in-out duration-700 backdrop-blur-sm bg-[#0D1D25]/70 ${
             showCategories ? "translate-x-0 " : "translate-x-full"
@@ -59,14 +64,14 @@ const MenuCategories: React.FC = () => {
             <MdClose />
           </button>
           <div className="mt-20 mr-6 text-[#E1E1E6] font-normal leading-relaxed">
-            <Link to={"/flowers-catalog"} className="hover:text-cyan-500">
+            <Link to={ "/flowers-catalog" } className={`hover:text-cyan-500 ${isActiveLink("/flowers-catalog")? 'hidden' : ''}`}>
               <p className="my-4">Flowers catalog</p>
             </Link>
             <br />
             {categories?.map((category) => (
               <Link
                 key={category.pk}
-                to={`/flowers-catalog/${category.slug}`}
+                to={`/flowers-catalog?${category.slug}`}
                 className="hover:text-cyan-500"
               >
                 <p className="my-4">{category.name}</p>

@@ -28,7 +28,6 @@ export const fetchAllFlowers = (searchParams: string) => {
       const response = await getAllFlowers(searchParams);
 
       dispatch(initialFlowers(response?.data.results));
-      console.log(response.data)
       dispatch(
         setPagination({
           count: response?.data.count,

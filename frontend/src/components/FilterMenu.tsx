@@ -11,7 +11,8 @@ const FilterMenu: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const categories = useAppSelector((state) => state.categories);
   const filterMenuRef = useRef<HTMLDivElement>(null);
-  const [filterParams, setFilterParams] = useState(queryString.parse(useLocation().search));
+  const queryFilters = queryString.parse(useLocation().search);
+  const [filterParams, setFilterParams] = useState(queryFilters);
   const dispatch = useAppDispatch();
 
   const handleClickOutside = (event: any) => {
@@ -35,7 +36,7 @@ const FilterMenu: React.FC = () => {
     (params: string[]) => {
       setFilterParams({ category: params });
     },
-    [setSearchParams]
+    [setFilterParams, filterParams]
   );
 
   const submitFilters = () => {
@@ -45,6 +46,12 @@ const FilterMenu: React.FC = () => {
       dispatch(fetchAllFlowers(newSearchParams));
     }
   };
+
+  const resetAllFilters = useCallback(() => {
+    setSearchParams(undefined);
+    setFilterParams({});
+    dispatch(fetchAllFlowers(""));
+  }, [filterParams]);
 
   return (
     <>
@@ -75,14 +82,26 @@ const FilterMenu: React.FC = () => {
             menuName="categories"
             elems={categories}
             changeFunc={setCategory}
-            values={filterParams.category}
+            values={
+              filterParams.category instanceof Object
+                ? filterParams.category
+                : [filterParams.category]
+            }
           />
-          <button
-            className="text-[#E1E1E6] hover:text-cyan-500 w-max my-auto py-2 px-3"
-            onClick={() => submitFilters()}
-          >
-            Submit
-          </button>
+          <div className="flex flex-row w-max mx-auto mt-4">
+            <button
+              className="text-[#E1E1E6] hover:text-cyan-500 w-max my-auto py-2 px-3"
+              onClick={() => submitFilters()}
+            >
+              Submit
+            </button>
+            <button
+              className="text-[#E1E1E6] hover:text-cyan-500 w-max my-auto py-2 px-3"
+              onClick={() => resetAllFilters()}
+            >
+              Reset
+            </button>
+          </div>
         </div>
       )}
     </>

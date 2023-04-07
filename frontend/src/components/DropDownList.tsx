@@ -8,21 +8,18 @@ const DropDownList = (props: {
   values: any;
 }) => {
   const [showDropDown, setShowDropDown] = useState(false);
-  const [params, setParams] = useState<string[]>(props.values || []);
 
   const checkElem = useCallback(
     (elem: string, checked: boolean) => {
       let outParams = [];
       if (checked) {
-        outParams = [...params, elem];
+        outParams = [...props.values, elem];
       } else {
-        outParams = params.filter((param) => param !== elem);
+        outParams = props.values.filter((value: any) => value !== elem);
       }
-
-      setParams(outParams);
       props.changeFunc(outParams);
     },
-    [params]
+    [props]
   );
 
   return (
@@ -49,7 +46,7 @@ const DropDownList = (props: {
               <input
                 id={elem.slug}
                 type="checkbox"
-                checked={params?.includes(elem.slug)}
+                checked={props.values?.includes(elem.slug)}
                 onChange={(event) => checkElem(elem.slug, event.target.checked)}
                 className="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
               />
