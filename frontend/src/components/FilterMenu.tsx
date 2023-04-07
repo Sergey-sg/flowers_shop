@@ -1,19 +1,17 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { MdClose, MdOutlineFilterList } from "react-icons/md";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import queryString from "query-string";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useAppSelector } from "../redux/hooks";
 import DropDownList from "./DropDownList";
-import { fetchAllFlowers } from "../redux/slice/flower/flowerActions";
 
-const FilterMenu: React.FC = () => {
+const FilterMenu = (props: {
+  filterParams: any;
+  setFilterParams: any;
+  submitFilters: any;
+  resetAllFilters: any;
+}) => {
   const [showSidebar, setShowSidebar] = useState(false);
-  const [searchParams, setSearchParams] = useSearchParams();
   const categories = useAppSelector((state) => state.categories);
   const filterMenuRef = useRef<HTMLDivElement>(null);
-  const queryFilters = queryString.parse(useLocation().search);
-  const [filterParams, setFilterParams] = useState(queryFilters);
-  const dispatch = useAppDispatch();
 
   const handleClickOutside = (event: any) => {
     if (
@@ -34,24 +32,10 @@ const FilterMenu: React.FC = () => {
 
   const setCategory = useCallback(
     (params: string[]) => {
-      setFilterParams({ category: params });
+      props.setFilterParams({ category: params });
     },
-    [setFilterParams, filterParams]
+    [props]
   );
-
-  const submitFilters = () => {
-    if (filterParams) {
-      const newSearchParams = queryString.stringify(filterParams);
-      setSearchParams(newSearchParams);
-      dispatch(fetchAllFlowers(newSearchParams));
-    }
-  };
-
-  const resetAllFilters = useCallback(() => {
-    setSearchParams(undefined);
-    setFilterParams({});
-    dispatch(fetchAllFlowers(""));
-  }, [filterParams]);
 
   return (
     <>
@@ -83,21 +67,21 @@ const FilterMenu: React.FC = () => {
             elems={categories}
             changeFunc={setCategory}
             values={
-              filterParams.category instanceof Object
-                ? filterParams.category
-                : [filterParams.category]
+              props.filterParams.category instanceof Object
+                ? props.filterParams.category
+                : [props.filterParams.category]
             }
           />
           <div className="flex flex-row w-max mx-auto mt-4">
             <button
               className="text-[#E1E1E6] hover:text-cyan-500 w-max my-auto py-2 px-3"
-              onClick={() => submitFilters()}
+              onClick={() => props.submitFilters()}
             >
               Submit
             </button>
             <button
               className="text-[#E1E1E6] hover:text-cyan-500 w-max my-auto py-2 px-3"
-              onClick={() => resetAllFilters()}
+              onClick={() => props.resetAllFilters()}
             >
               Reset
             </button>

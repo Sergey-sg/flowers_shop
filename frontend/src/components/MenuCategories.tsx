@@ -11,9 +11,14 @@ const MenuCategories: React.FC = () => {
   const MenuCategoriesRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
-  const isActiveLink = (path: string) => {
-    return location.pathname === path;
-  }
+  const isActiveLink = (
+    event: { preventDefault: () => void },
+    path: string
+  ) => {
+    if (location.pathname === path) {
+      event.preventDefault();
+    }
+  };
 
   const handleClickOutside = (event: any) => {
     if (
@@ -64,14 +69,18 @@ const MenuCategories: React.FC = () => {
             <MdClose />
           </button>
           <div className="mt-20 mr-6 text-[#E1E1E6] font-normal leading-relaxed">
-            <Link to={ "/flowers-catalog" } className={`hover:text-cyan-500 ${isActiveLink("/flowers-catalog")? 'hidden' : ''}`}>
+            <Link
+              to={"/flowers-catalog"}
+              className="hover:text-cyan-500"
+              onClick={(e) => isActiveLink(e, "/flowers-catalog")}
+            >
               <p className="my-4">Flowers catalog</p>
             </Link>
             <br />
             {categories?.map((category) => (
               <Link
                 key={category.pk}
-                to={`/flowers-catalog?${category.slug}`}
+                to={`/flowers-catalog?category=${category.slug}`}
                 className="hover:text-cyan-500"
               >
                 <p className="my-4">{category.name}</p>

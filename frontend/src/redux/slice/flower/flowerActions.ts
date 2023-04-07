@@ -12,7 +12,7 @@ const getOneFlowerBySlug = (slug: string) => {
 };
 
 const getAllFlowers = (searchParams: string) => {
-  return api.get(`shop/flowers/${'?' + searchParams || ''}`);
+  return api.get(`shop/flowers/${"?" + searchParams || ""}`);
 };
 
 const getNextPageOfFlowers = (url: string) => {

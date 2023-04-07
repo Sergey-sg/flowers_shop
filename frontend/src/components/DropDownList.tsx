@@ -35,12 +35,12 @@ const DropDownList = (props: {
       <div
         className={`z-10 ${
           showDropDown ? "" : "hidden"
-        } w-max p-4 bg-white rounded-lg shadow`}
+        } w-max p-4 text-[#E1E1E6] backdrop-blur-sm bg-[#033857]/40 rounded-lg shadow`}
       >
-        <h6 className="mb-3 text-sm text-gray-900 dark:text-white">
+        <div className="mb-3 text-sm">
           {props.menuName.charAt(0).toUpperCase() + props.menuName.slice(1)}
-        </h6>
-        <ul className="space-y-2 text-sm" aria-labelledby="dropdownDefault">
+        </div>
+        <ul className="space-y-2 text-sm">
           {props.elems?.map((elem) => (
             <li key={elem.pk} className="flex items-center">
               <input
@@ -48,11 +48,11 @@ const DropDownList = (props: {
                 type="checkbox"
                 checked={props.values?.includes(elem.slug)}
                 onChange={(event) => checkElem(elem.slug, event.target.checked)}
-                className="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                className="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2"
               />
               <label
                 htmlFor={elem.slug}
-                className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
+                className="ml-2 text-sm"
               >
                 {elem.name}
               </label>
