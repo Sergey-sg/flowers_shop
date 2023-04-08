@@ -14,5 +14,4 @@ class ProductFilter(filters.FilterSet):
         categories = self.request.GET.getlist('category')
         for category in categories:
             queryset = queryset.filter(category__slug=category)
-            print(queryset)
         return queryset

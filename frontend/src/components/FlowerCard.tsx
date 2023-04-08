@@ -18,10 +18,10 @@ export function FlowerCard(props: { flower: IFlowerItem }) {
         <br />
         <p className="font-bold text-2xl leading-snug">{props.flower.name}</p>
       </Link>
-      <p className="font-normal text-sm leading-relaxed">
+      <div className="font-normal text-sm leading-relaxed">
         {props.flower.description.substring(0, 100)}
         {props.flower.description.length > 100 ? " ..." : ""}
-      </p>
+      </div>
       <div className="mx-4 mt-auto">
         <span className="text-[#82F3FF] font-normal text-3xl leading-relaxed">
           $ {props.flower.price / 100}

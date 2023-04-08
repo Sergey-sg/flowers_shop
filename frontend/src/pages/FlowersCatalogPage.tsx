@@ -8,6 +8,7 @@ import { FlowerCard } from "../components/FlowerCard";
 import FilterMenu from "../components/FilterMenu";
 import queryString from "query-string";
 import { useLocation, useSearchParams } from "react-router-dom";
+import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
 
 const FlowersCatalogPage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -44,15 +45,12 @@ const FlowersCatalogPage: React.FC = () => {
 
   return (
     <>
-      <div className="flex flex-row w-11/12 mx-auto">
-        <div className="bg-[#033857] hover:bg-[#042a40] rounded-xl text-[#E1E1E6] p-4 ml-8 my-4 w-max">Ordering</div>
-        <FilterMenu
-          filterParams={filterParams}
-          setFilterParams={setFilterParams}
-          submitFilters={submitFilters}
-          resetAllFilters={resetAllFilters}
-        />
-      </div>
+      <FilterMenu
+        filterParams={filterParams}
+        setFilterParams={setFilterParams}
+        submitFilters={submitFilters}
+        resetAllFilters={resetAllFilters}
+      />
       {!flowers.length ? (
         <div className="m-auto text-3xl text-white">
           Not see flowers, try change filters

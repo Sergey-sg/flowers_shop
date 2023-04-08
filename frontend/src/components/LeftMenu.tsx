@@ -4,7 +4,7 @@ import { fetchAllCategories } from "../redux/slice/category/categoryActions";
 import { MdMenu, MdClose } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
 
-const MenuCategories: React.FC = () => {
+const LeftMenu: React.FC = () => {
   const dispatch = useAppDispatch();
   const categories = useAppSelector((state) => state.categories);
   const [showCategories, setShowCategories] = useState(false);
@@ -30,8 +30,6 @@ const MenuCategories: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log("in useEffect ref categories");
-
     document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
@@ -93,4 +91,4 @@ const MenuCategories: React.FC = () => {
   );
 };
 
-export default MenuCategories;
+export default LeftMenu;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/shopLogo.png";
-import MenuCategories from "./MenuCategories";
+import LeftMenu from "./LeftMenu";
 
 const Header: React.FC = () => {
   return (
@@ -16,7 +16,7 @@ const Header: React.FC = () => {
           />
           <div className="ml-8 my-auto">flowers shop</div>
         </Link>
-        <MenuCategories />
+        <LeftMenu />
         <input
           placeholder="Search your flower"
           type={"text"}
