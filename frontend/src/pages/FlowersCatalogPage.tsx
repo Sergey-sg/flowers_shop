@@ -8,7 +8,7 @@ import { FlowerCard } from "../components/FlowerCard";
 import FilterMenu from "../components/FilterMenu";
 import queryString from "query-string";
 import { useLocation, useSearchParams } from "react-router-dom";
-import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
+import OrderingDropDown from "../components/OrderingDropDown";
 
 const FlowersCatalogPage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -22,7 +22,7 @@ const FlowersCatalogPage: React.FC = () => {
   useEffect(() => {
     console.log("start useEffect in AllFlowersPage");
 
-    dispatch(fetchAllFlowers(queryString.stringify(filterParams)));  // eslint-disable-next-line
+    dispatch(fetchAllFlowers(queryString.stringify(filterParams))); // eslint-disable-next-line
   }, [searchParams, dispatch]);
 
   const loadNextPage = () => {
@@ -43,14 +43,36 @@ const FlowersCatalogPage: React.FC = () => {
     dispatch(fetchAllFlowers(""));
   };
 
+  const setOrdering = (slug: string) => {
+    const newSearchParams = queryString.stringify({
+      ...filterParams,
+      ordering: slug,
+    });
+    setFilterParams({ ...filterParams, ordering: slug });
+    setSearchParams(newSearchParams);
+    dispatch(fetchAllFlowers(newSearchParams));
+  };
+
   return (
     <>
-      <FilterMenu
-        filterParams={filterParams}
-        setFilterParams={setFilterParams}
-        submitFilters={submitFilters}
-        resetAllFilters={resetAllFilters}
-      />
+      <div className="flex flex-row justify-between w-11/12 mx-auto pt-4">
+        <OrderingDropDown
+          elems={[
+            { name: "cheaper first", slug: "price" },
+            { name: "first more expensive", slug: "-price" },
+          ]}
+          changeFunc={setOrdering}
+          value={filterParams.ordering}
+          nameOfFilter={"ordering"}
+        />
+        <FilterMenu
+          filterParams={filterParams}
+          setFilterParams={setFilterParams}
+          submitFilters={submitFilters}
+          resetAllFilters={resetAllFilters}
+        />
+      </div>
+
       {!flowers.length ? (
         <div className="m-auto text-3xl text-white">
           Not see flowers, try change filters

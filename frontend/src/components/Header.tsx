@@ -6,7 +6,7 @@ import LeftMenu from "./LeftMenu";
 const Header: React.FC = () => {
   return (
     <div className="w-full bg-[#00111A]">
-      <div className="flex py-4 px-6 text-center w-11/12 mx-auto">
+      <div className="flex py-4 text-center w-11/12 mx-auto">
         <Link to={"/"} className="text-[#FFFFFF] hover:text-cyan-500">
           <img
             className="rounded-full float-left"

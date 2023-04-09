@@ -1,13 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import {
-  MdArrowDropDown,
-  MdArrowDropUp,
-  MdClose,
-  MdOutlineFilterList,
-} from "react-icons/md";
+import { MdClose, MdOutlineFilterList } from "react-icons/md";
 import { useAppSelector } from "../redux/hooks";
 import DropDownList from "./DropDownList";
-import OrderingDropDown from "./OrderingDropDown";
 
 const FilterMenu = (props: {
   filterParams: any;
@@ -43,23 +37,13 @@ const FilterMenu = (props: {
     [props]
   );
 
-  const setFilters = useCallback(
-    (params: any) => {
-      props.setFilterParams({ ...props.filterParams, ...params });
-    },
-    [props]
-  );
-
   return (
-    <div className="w-11/12 mx-auto flex flex-row justify-end">
+    <div className="p-4">
       <button
         onClick={() => setShowSidebar(!showSidebar)}
-        className="bg-[#033857] hover:bg-[#042a40] rounded-xl text-[#E1E1E6] p-4 my-4 w-max mr-8"
+        className="text-[#E1E1E6] bg-[#033857] hover:bg-[#042a40] rounded-lg p-3 text-center inline-flex w-max items-center mb-2"
       >
-        <div className="flex flex-row justify-center">
-          <MdOutlineFilterList size={20} />
-          <span className="pl-3">Filters</span>
-        </div>
+        <MdOutlineFilterList className="mr-1 text-xl" /> Filters
       </button>
 
       {showSidebar && (
@@ -84,12 +68,6 @@ const FilterMenu = (props: {
                 ? props.filterParams.category
                 : [props.filterParams.category]
             }
-          />
-          <OrderingDropDown
-            elems={[{name: 'cheaper first', slug: 'price'}, {name: 'first more expensive', slug: '-price'}]}
-            changeFunc={setFilters}
-            values={[props.filterParams.ordering]}
-            nameOfFilter={'ordering'}
           />
           <div className="flex flex-row w-max mx-auto mt-4">
             <button

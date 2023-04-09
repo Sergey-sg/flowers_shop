@@ -28,21 +28,17 @@ function ArrowScroll(props: { items: IFlowerItem[] }) {
   const { disableScroll, enableScroll } = usePreventBodyScroll();
 
   return (
-    <>
-      <div className="example">
-        <div onMouseEnter={disableScroll} onMouseLeave={enableScroll}>
-          <ScrollMenu
-            LeftArrow={LeftArrow}
-            RightArrow={RightArrow}
-            onWheel={onWheel}
-          >
-            {props.items?.map((item) => (
-              <FlowerCard key={item.pk} flower={item} />
-            ))}
-          </ScrollMenu>
-        </div>
-      </div>
-    </>
+    <div onMouseEnter={disableScroll} onMouseLeave={enableScroll} >
+      <ScrollMenu
+        LeftArrow={LeftArrow}
+        RightArrow={RightArrow}
+        onWheel={onWheel}
+      >
+        {props.items?.map((item) => (
+          <FlowerCard key={item.pk} flower={item} />
+        ))}
+      </ScrollMenu>
+    </div>
   );
 }
 
