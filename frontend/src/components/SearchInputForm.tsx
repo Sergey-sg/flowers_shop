@@ -3,15 +3,24 @@ import { useFormik } from "formik";
 import { RiSearchLine } from "react-icons/ri";
 import { useAppSelector } from "../redux/hooks";
 import { searchInputSchema } from "../schemas/searchInputSchema";
+import { useLocation, useNavigate } from "react-router-dom";
+import queryString from "query-string";
 
 const SearchInputForm: React.FC = () => {
   const loader = useAppSelector((state) => state.loader);
+  const queryParams = queryString.parse(useLocation().search);
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
-      requestText: "",
+      requestText: '',
     },
     onSubmit: (values) => {
-      alert(JSON.stringify(values.requestText, null, 2));
+      navigate(
+        `/flowers-catalog?${queryString.stringify({
+          ...queryParams,
+          search: values.requestText,
+        })}`
+      );
     },
     validationSchema: searchInputSchema,
   });

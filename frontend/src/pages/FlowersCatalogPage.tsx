@@ -18,12 +18,14 @@ const FlowersCatalogPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const queryFilters = queryString.parse(useLocation().search);
   const [filterParams, setFilterParams] = useState(queryFilters);
+  const {search} = queryFilters;
 
   useEffect(() => {
     console.log("start useEffect in AllFlowersPage");
 
-    dispatch(fetchAllFlowers(queryString.stringify(filterParams))); // eslint-disable-next-line
-  }, [searchParams, dispatch]);
+    dispatch(fetchAllFlowers(queryString.stringify({...filterParams, search}))); 
+    // eslint-disable-next-line
+  }, [searchParams, dispatch, search]);
 
   const loadNextPage = () => {
     if (pagination.next) {
@@ -32,7 +34,7 @@ const FlowersCatalogPage: React.FC = () => {
   };
 
   const submitFilters = () => {
-    const newSearchParams = queryString.stringify(filterParams);
+    const newSearchParams = queryString.stringify({...filterParams, search});
     setSearchParams(newSearchParams);
     dispatch(fetchAllFlowers(newSearchParams));
   };
