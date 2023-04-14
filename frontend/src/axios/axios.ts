@@ -17,6 +17,7 @@ api.interceptors.response.use(
   (resp) => resp,
   async (error) => {
     if (
+      // eslint-disable-next-line
       error.response.status == 401 &&
       error.config &&
       !error.config._isRetry
