@@ -9,13 +9,14 @@ def cart_item_create_or_add_quantity(product, request):
         cart = Cart.objects.get(cart_id=get_cart_id(request))
     except Cart.DoesNotExist:
         cart = Cart.objects.create(cart_id=get_cart_id(request))
-    cart.save()
+        cart.save()
     try:
         cart_item = CartItem.objects.get(product=product, cart=cart)
         cart_item.quantity += 1
         cart_item.save()
     except CartItem.DoesNotExist:
-        cart_item = CartItem.objects.create(product=product, quantity=1, cart=cart)
+        cart_item = CartItem.objects.create(
+            product=product, quantity=1, cart=cart)
         cart_item.save()
     return cart_item
 
@@ -26,6 +27,7 @@ def reduce_quantity_of_cart_item_or_delete(product, request):
     if cart_item.quantity > 1:
         cart_item.quantity -= 1
         cart_item.save()
+        return cart_item
     else:
         cart_item.delete()
 

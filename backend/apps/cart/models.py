@@ -36,7 +36,7 @@ class CartItem(models.Model):
         order (class Order): communication with the Order model
         quantity (int): the quantity of the product in the cart
         active (bool): indicator of the state of the cart item (true - in the cart, false - the order is placed)
-        sub_total (float): the total price of the products in cart item
+        sub_total (int): the total price of the products in cart item
     """
     product = models.ForeignKey(
         Product,
@@ -58,7 +58,7 @@ class CartItem(models.Model):
         verbose_name=_('order'),
         help_text=_('communication with the Order model')
     )
-    quantity = models.IntegerField(
+    quantity = models.PositiveIntegerField(
         verbose_name=_('quantity'),
         help_text=_('the quantity of the product in the cart item')
     )
@@ -67,11 +67,9 @@ class CartItem(models.Model):
         verbose_name=_('active'),
         help_text=_('indicator of the state of the cart item')
     )
-    sub_total = models.DecimalField(
+    sub_total = models.PositiveIntegerField(
         verbose_name=_('total price'),
-        help_text=_('the total price of the products in cart item'),
-        max_digits=12,
-        decimal_places=2
+        help_text=_('the total price in coins of the products in cart item'),
     )
 
     class Meta:
@@ -145,11 +143,9 @@ class Order(CreatedUpdateMixins):
         verbose_name=_('sent'),
         help_text=_('order dispatch status')
     )
-    total_price = models.DecimalField(
+    total_price = models.PositiveIntegerField(
         verbose_name=_('total price'),
-        help_text=_('total price of order'),
-        max_digits=12,
-        decimal_places=2
+        help_text=_('total price of order in coins'),
     )
 
     class Meta:

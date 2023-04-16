@@ -35,6 +35,7 @@ urlpatterns += i18n_patterns(
         path('shop/', include([
             path('', include('apps.flower.urls')),
             path('recommendations/', include('apps.recommendation.urls')),
+            path('cart/', include('apps.cart.urls')),
         ])),
     ])),
 )
