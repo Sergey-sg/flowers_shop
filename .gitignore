@@ -2,21 +2,6 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=django
 
 ### Django ###
-/media
-/static
-.idea
-app/.env
-/sent_emails
-.coverage
-.DS_Store
-*.sqlite3
-.env
-.vscode/
-
-# Created by https://www.toptal.com/developers/gitignore/api/django
-# Edit at https://www.toptal.com/developers/gitignore?templates=django
-
-### Django ###
 *.log
 *.pot
 *.pyc
@@ -186,4 +171,5 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 .idea/
 
+.vscode/
 # End of https://www.toptal.com/developers/gitignore/api/django

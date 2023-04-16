@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { FlowerDetail } from "./pages/FlowerDetail";
 import FlowersCatalogPage from "./pages/FlowersCatalogPage";
+import { CartPage } from "./pages/CartPage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/:flowerSlug" element={<FlowerDetail />} />
         <Route path="/flowers-catalog" element={<FlowersCatalogPage />} />
+        <Route path="/cart" element={<CartPage />} />
       </Routes>
       <Footer />
     </div>

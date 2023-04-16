@@ -19,9 +19,9 @@ const Header: React.FC = () => {
         </Link>
         <LeftMenu />
         <SearchInputForm />
-        <button className="mx-8 my-auto bg-red-700 hover:bg-red-800 rounded-xl py-3 px-4">
+        <Link to={"/cart"} className="mx-8 my-auto bg-red-700 hover:bg-red-800 rounded-xl py-3 px-4">
           Cart
-        </button>
+        </Link>
       </div>
     </div>
   );
