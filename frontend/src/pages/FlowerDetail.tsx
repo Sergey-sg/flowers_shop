@@ -8,16 +8,16 @@ import { MdArrowBackIos } from "react-icons/md";
 export function FlowerDetail() {
   const dispatch = useAppDispatch();
   const { flowerSlug } = useParams()
-  const [flower] = useAppSelector((state) => state.flowers.filter((flower) => flower.slug === flowerSlug));
+  const [flower] = useAppSelector((state) => state.flowers);
   const navigate = useNavigate();
 
   useEffect(() => {
     console.log("start useEffect in FlowerDetail page");
 
-    if (!flower && flowerSlug) {
+    if (flowerSlug) {
       dispatch(fetchOneFlowerBySlug(flowerSlug));
     }
-  });
+  }, [flowerSlug, dispatch]);
 
   return (
     <div className="w-10/12 mx-auto mb-14">
@@ -47,7 +47,7 @@ export function FlowerDetail() {
             </div>  
             <br />
             <div className="flex">
-              <span className="text-[#82F3FF] font-normal text-3xl leading-relaxed mr-4">$ {flower.price/100}</span><ToCartButton />
+              <span className="text-[#82F3FF] font-normal text-3xl leading-relaxed mr-4">$ {flower.price/100}</span><ToCartButton productId={flower.pk}/>
             </div>
           </div>
         </div>

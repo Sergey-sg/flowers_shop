@@ -23,13 +23,18 @@ def cart_item_create_or_add_quantity(product, request):
 
 def reduce_quantity_of_cart_item_or_delete(product, request):
     cart = Cart.objects.get(cart_id=get_cart_id(request))
-    cart_item = CartItem.objects.get(product=product, cart=cart)
-    if cart_item.quantity > 1:
-        cart_item.quantity -= 1
-        cart_item.save()
-        return cart_item
-    else:
-        cart_item.delete()
+    try:
+        cart_item = CartItem.objects.get(product=product, cart=cart)
+        if cart_item.quantity > 1:
+            cart_item.quantity -= 1
+            cart_item.save()
+            return cart_item
+        else:
+            cart_item_id = cart_item.pk
+            cart_item.delete()
+            return cart_item_id
+    except CartItem.DoesNotExist:
+        pass
 
 
 def cart_item_delete(product, request):

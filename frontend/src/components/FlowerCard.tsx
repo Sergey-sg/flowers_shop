@@ -27,7 +27,7 @@ export function FlowerCard(props: { flower: IFlowerItem }) {
           $ {props.flower.price / 100}
         </span>
         <br />
-        <ToCartButton />
+        <ToCartButton productId={props.flower.pk}/>
       </div>
     </div>
   );

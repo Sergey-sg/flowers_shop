@@ -2,7 +2,6 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    # path('', views.CreateCustomerOrderView.as_view(), name='cart_detail'),
     path('', views.CartItemsListAPIView.as_view(), name='cart_items_list'),
     path('<int:pk>/', include([
         path('add/', views.AddCartItemToCart.as_view(), name='add_cart'),

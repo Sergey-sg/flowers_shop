@@ -6,6 +6,7 @@ import successSlice from "./slice/loader/success.slice";
 import errorSlice from "./slice/loader/error.slice";
 import loaderSlice from "./slice/loader/loader.slice";
 import paginationSlice from "./slice/pagination/pagination.slice";
+import cartSlice from "./slice/cart/cart.slice";
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     success: successSlice,
     error: errorSlice,
     loader: loaderSlice,
+    cart: cartSlice,
   },
 });
 // Infer the `RootState` and `AppDispatch` types from the store itself

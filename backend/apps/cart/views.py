@@ -30,7 +30,7 @@ class CartItemsListAPIView(generics.ListAPIView):
         cart_items = self.get_queryset()
         total = cart_items.aggregate(Sum('sub_total'))['sub_total__sum']
         cart_items = [CartItemSerializer(item).data for item in cart_items]
-        return JsonResponse({'products': cart_items, 'total': total})
+        return JsonResponse({'items': cart_items, 'total': total})
 
 
 class AddCartItemToCart(View):
@@ -38,7 +38,9 @@ class AddCartItemToCart(View):
     def get(self, request, *args, **kwargs):
         product = get_object_or_404(Product, id=kwargs['pk'])
         cart_item = cart_item_create_or_add_quantity(product=product, request=request)
-        return JsonResponse(CartItemSerializer(cart_item).data)
+        cart_items = CartItem.objects.filter(cart__cart_id=get_cart_id(request))
+        total = cart_items.aggregate(Sum('sub_total'))['sub_total__sum']
+        return JsonResponse({'cartItem': CartItemSerializer(cart_item).data, 'total': total})
 
 
 class CartItemReduceQuantityOrDelete(View):
@@ -46,9 +48,11 @@ class CartItemReduceQuantityOrDelete(View):
     def get(self, request, *args, **kwargs):
         product = get_object_or_404(Product, id=kwargs['pk'])
         cart_item = reduce_quantity_of_cart_item_or_delete(product=product, request=request)
-        if cart_item:
-            return JsonResponse(CartItemSerializer(cart_item).data)
-        return HttpResponse(status=status.HTTP_204_NO_CONTENT)
+        cart_items = CartItem.objects.filter(cart__cart_id=get_cart_id(request)) 
+        total = cart_items.aggregate(Sum('sub_total'))['sub_total__sum'] or 0 
+        if type(cart_item) is CartItem:
+            return JsonResponse({'cartItem': CartItemSerializer(cart_item).data, 'total': total})
+        return JsonResponse({'cartItem': {'pk': cart_item, 'product': False}, 'total': total})
 
 
 class CartItemDelete(View):
