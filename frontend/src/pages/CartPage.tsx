@@ -47,112 +47,52 @@ export function CartPage() {
   //   });
 
   return (
-    <div className="w-10/12 mx-auto mb-14">
-      {!cart ? (
-        <div className="m-auto text-[#E1E1E6]">
-          <br />
-          <div className="text-3xl">Your cart is empty'</div>
-          <br />
-          <div className="mt-20 mr-6 font-normal leading-relaxed">
-            <Link to={"/flowers-catalog"} className="hover:text-cyan-500">
-              <p className="my-4 p-3">
-                Click here to go back to products catalog
-              </p>
-            </Link>
-          </div>
-        </div>
-      ) : (
-        <form className="w-full">
-          <div className="flex flex-row w-full">
-            <div className="flex flex-col border rounded text-[#E1E1E6] px-3">
-                <br />
-                <label>
-                  name
-                  <br/>
-                  <input type="text" />
-                </label>
-                <br />
-                <label>
-                  email
-                  <br/>
-                  <input type="email" />
-                </label>
-                <br />
-                <label>
-                  phone
-                  <br/>
-                  <input type="number" />
-                </label>
-            </div>
-            <div className="flex flex-col justify-between border rounded w-full text-[#E1E1E6]">
-              <table>
-                <thead className="cart-thead">
-                  <tr>
-                    <th colSpan={4}>Your items</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {cart.products?.map((product) => (
-                    <tr key={product.pk}>
-                      <td>
-                        <Link
-                          to={`/${product.product.slug}`}
-                          className="text-[#FFFFFF] hover:text-cyan-500"
-                        >
-                          {product.product.image && (
-                            <>
-                              <img
-                                src={`${product.product.image}`}
-                                alt={product.product.img_alt}
-                                className="mx-auto max-h-[150px]"
-                              />
-                              <br />
-                            </>
-                          )}
-                          <p className="font-bold text-2xl leading-snug">
-                            {product.product.name}
-                          </p>
-                        </Link>
-                      </td>
-                      <td className="justify-start">
-                        <div>
-                          Quantity: {product.quantity} x {product.product.name}
-                        </div>
-                      </td>
-                      <td>${product.sub_total}</td>
-                      {/* {% if cart_item.product.stock == None or cart_item.quantity < cart_item.product.stock %}
-                            <td>
-                                <a href="{{ url('add_cart', cart_item.product_id) }}" class="add-cart" data-id="{{ cart_item.product.id }}" data-name="{{ cart_item.product.name }}"><i class="material-icons cart-icon">add_shopping_cart</i></a>
-                                <a href="{{ url('cart_remove', cart_item.product_id) }}"><i class="material-icons cart-icon">remove_circle_outline</i></a>
-                                <a href="{{ url('cart_remove_product', cart_item.product_id) }}"><i class="material-icons cart-icon">delete</i></a>
-                            </td>
-                        {% else %}
-                            <td>
-                                <a href="{{ url('cart_remove', cart_item.product_id) }}"><i class="material-icons cart-icon">remove_circle_outline</i></a>
-                                <a href="{{ url('cart_remove_product', cart_item.product_id) }}"><i class="material-icons cart-icon">delete</i></a>
-                            </td>
-                        {% endif %} */}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <br />
-          <div className="container">
-            <br />
-            <div className="text-end">
-              Total price: <strong>${cart.total}</strong>&nbsp&nbsp&nbsp&nbsp
-              <button
-                className="bg-[#033857] hover:bg-[#042a40] text-[#E1E1E6] px-3 py-2"
-                type="submit"
-              >
-                Submit
-              </button>
-            </div>
-          </div>
+    <div className="w-10/12 mx-auto mb-14 text-[#E1E1E6]">
+      <div className="mb-4 flex flex-row">
+        <form className="flex flex-col p-4 w-5/12 border-r-2 mr-4">
+          <label>
+            *Name: <br />
+            <input
+              type={"text"}
+              name="name"
+              className="bg-[#0D1D25] w-full rounded-xl py-2 px-4 focus:outline-none focus:border-slate-400 focus:ring-slate-400 focus:ring-1"
+            />
+          </label>
+          <label>
+            *Email: <br />
+            <input
+              type={"email"}
+              name="email"
+              className="bg-[#0D1D25] w-full rounded-xl py-2 px-4 focus:outline-none focus:border-slate-400 focus:ring-slate-400 focus:ring-1"
+            />
+          </label>
+          <label>
+            *Address: <br />
+            <input
+              type={"text"}
+              name="address"
+              className="bg-[#0D1D25] w-full rounded-xl py-2 px-4 focus:outline-none focus:border-slate-400 focus:ring-slate-400 focus:ring-1"
+            />
+          </label>
         </form>
-      )}
+        <div className="flex flex-col">
+          {cart.products?.map((product) => (
+            <div key={product.pk} className="flex flex-row mt-2">
+              <img
+                src={`${product.product.image}`}
+                alt={product.product.img_alt}
+                className="h-24 my-auto"
+              />
+              <div className="my-auto pl-4">
+                {product.product.name} x {product.quantity} = $
+                {product.sub_total}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <hr />
+      <div className="text-end pr-8 my-4">Total price: ${cart.total}</div>
     </div>
   );
 }
