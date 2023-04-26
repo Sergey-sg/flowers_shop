@@ -60,7 +60,9 @@ class CartItemDelete(View):
     def get(self, request, *args, **kwargs):
         product = get_object_or_404(Product, id=kwargs['pk'])
         cart_item_delete(product=product, request=request)
-        return HttpResponse(status=status.HTTP_204_NO_CONTENT)
+        cart_items = CartItem.objects.filter(cart__cart_id=get_cart_id(request)) 
+        total = cart_items.aggregate(Sum('sub_total'))['sub_total__sum'] or 0
+        return JsonResponse({'cartItem': {'pk': kwargs['pk'], 'product': False}, 'total': total})
 
 
 # class CreateCustomerOrderView(CreateView):

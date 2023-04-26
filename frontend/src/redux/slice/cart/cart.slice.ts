@@ -48,7 +48,6 @@ const cartSlice = createSlice({
       action: PayloadAction<IAnswerFromCart>
     ) => {
       if (!action.payload.cartItem.product) {
-        console.log(state.items.filter((item) => item.pk !== action.payload.cartItem.pk))
         state.items = state.items.filter((item) => item.pk !== action.payload.cartItem.pk);
       } else {
         state.items = state.items.map((item) => {
@@ -61,10 +60,17 @@ const cartSlice = createSlice({
       };
       state.total = action.payload.total;
     },
+    removeProductFromCart: (
+      state,
+      action: PayloadAction<IAnswerFromCart>
+    ) => {
+      state.items = state.items.filter((item) => item.product.pk !== action.payload.cartItem.pk);
+      state.total = action.payload.total;
+    },
   },
 });
 
-export const { initialCart, addProductToCart, reduceOrDeleteProductCart } =
+export const { initialCart, addProductToCart, reduceOrDeleteProductCart, removeProductFromCart } =
   cartSlice.actions;
 
 export default cartSlice.reducer;

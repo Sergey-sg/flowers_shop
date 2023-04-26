@@ -4,7 +4,7 @@ import { AppDispatch } from "../../store";
 import { errorOccurred, resetError } from "../loader/error.slice";
 import { startLoading, stopLoading } from "../loader/loader.slice";
 import { successAction } from "../loader/success.slice";
-import { addProductToCart, initialCart, reduceOrDeleteProductCart } from "./cart.slice";
+import { addProductToCart, initialCart, reduceOrDeleteProductCart, removeProductFromCart } from "./cart.slice";
 
 const getCart = () => {
   return api.get('shop/cart/');
@@ -17,6 +17,10 @@ const addCartItemToCart = (productId: number) => {
 const reduceQuantityOrDelete = (productId: number) => {
   return api.get(`shop/cart/${productId}/remove/`);
 };
+
+const removeProduct = (productId: number) => {
+  return api.get(`shop/cart/${productId}/delete/`)
+}
 
 export const fetchGetCart = () => {
   return async (dispatch: AppDispatch) => {
@@ -72,6 +76,28 @@ export const fetchReduceOrDeleteProductInCart = (productId: number) => {
 
       dispatch(reduceOrDeleteProductCart(response?.data));
       dispatch(successAction({ message: "Product remove from cart successfully" }));
+    } catch (e) {
+      const axiosErr = e as AxiosError;
+      const status = axiosErr.response?.status;
+      const message = axiosErr.message;
+
+      dispatch(errorOccurred({ statusCode: status, message: message }));
+    } finally {
+      dispatch(stopLoading());
+    }
+  };
+};
+
+export const fetchRemoveProductFromCart = (productId: number) => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      dispatch(resetError());
+      dispatch(startLoading());
+
+      const response = await removeProduct(productId);
+
+      dispatch(removeProductFromCart(response?.data));
+      dispatch(successAction({ message: "Cart item remove from cart successfully" }));
     } catch (e) {
       const axiosErr = e as AxiosError;
       const status = axiosErr.response?.status;

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { Link } from "react-router-dom";
 import { fetchGetCart } from "../redux/slice/cart/cartActions";
-import ToCartButton from "../components/ToCartButton";
+import { ReduceOrDeleteProductFromCart, AddProductToCart, RemoveProductFromCart } from "../components/ButtonsForCart";
 
 function currentImagesPath(path: string) {
   if (path.includes("http://localhost:8000/")) {
@@ -52,7 +52,7 @@ export function CartPage() {
                 />
               </label>
             </form>
-            <div className="flex flex-col w-full">
+            <div className="flex flex-col w-full max-h-[70vh] overflow-y-auto">
               {cart.items?.map((item) => (
                 <div key={item.pk} className="flex flex-row mt-2 justify-between">
                   <Link
@@ -62,7 +62,7 @@ export function CartPage() {
                     <img
                       src={currentImagesPath(item.product.image)}
                       alt={item.product.img_alt}
-                      className="h-24 my-auto"
+                      className="w-24 my-auto"
                     />
                     <span className="my-auto ml-4">{item.product.name}</span>
                   </Link>
@@ -70,7 +70,9 @@ export function CartPage() {
                     <span className="my-auto mx-2">
                       ${item.product.price/100} x {item.quantity} = ${item.sub_total/100}
                     </span>
-                    <ToCartButton productId={item.product.pk} />
+                    <ReduceOrDeleteProductFromCart productId={item.product.pk} />
+                    <AddProductToCart productId={item.product.pk} />
+                    <RemoveProductFromCart productId={item.product.pk} />
                   </div>
                 </div>
               ))}
