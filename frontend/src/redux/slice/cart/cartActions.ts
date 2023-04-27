@@ -4,10 +4,15 @@ import { AppDispatch } from "../../store";
 import { errorOccurred, resetError } from "../loader/error.slice";
 import { startLoading, stopLoading } from "../loader/loader.slice";
 import { successAction } from "../loader/success.slice";
-import { addProductToCart, initialCart, reduceOrDeleteProductCart, removeProductFromCart } from "./cart.slice";
+import {
+  addProductToCart,
+  initialCart,
+  reduceOrDeleteProductCart,
+  removeProductFromCart,
+} from "./cart.slice";
 
 const getCart = () => {
-  return api.get('shop/cart/');
+  return api.get("shop/cart/");
 };
 
 const addCartItemToCart = (productId: number) => {
@@ -19,8 +24,8 @@ const reduceQuantityOrDelete = (productId: number) => {
 };
 
 const removeProduct = (productId: number) => {
-  return api.get(`shop/cart/${productId}/delete/`)
-}
+  return api.get(`shop/cart/${productId}/delete/`);
+};
 
 export const fetchGetCart = () => {
   return async (dispatch: AppDispatch) => {
@@ -53,7 +58,9 @@ export const fetchAddProductToCart = (productId: number) => {
       const response = await addCartItemToCart(productId);
 
       dispatch(addProductToCart(response?.data));
-      dispatch(successAction({ message: "Product added to cart successfully" }));
+      dispatch(
+        successAction({ message: "Product added to cart successfully" })
+      );
     } catch (e) {
       const axiosErr = e as AxiosError;
       const status = axiosErr.response?.status;
@@ -75,7 +82,9 @@ export const fetchReduceOrDeleteProductInCart = (productId: number) => {
       const response = await reduceQuantityOrDelete(productId);
 
       dispatch(reduceOrDeleteProductCart(response?.data));
-      dispatch(successAction({ message: "Product remove from cart successfully" }));
+      dispatch(
+        successAction({ message: "Product remove from cart successfully" })
+      );
     } catch (e) {
       const axiosErr = e as AxiosError;
       const status = axiosErr.response?.status;
@@ -97,7 +106,9 @@ export const fetchRemoveProductFromCart = (productId: number) => {
       const response = await removeProduct(productId);
 
       dispatch(removeProductFromCart(response?.data));
-      dispatch(successAction({ message: "Cart item remove from cart successfully" }));
+      dispatch(
+        successAction({ message: "Cart item remove from cart successfully" })
+      );
     } catch (e) {
       const axiosErr = e as AxiosError;
       const status = axiosErr.response?.status;

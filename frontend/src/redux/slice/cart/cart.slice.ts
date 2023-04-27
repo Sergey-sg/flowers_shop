@@ -1,32 +1,21 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import {
+  IAnswerFromCart,
+  ICart,
+  ICustomer,
+} from "../../../interfaces/Cart.interface";
 
-interface ICartItem {
-  pk: number;
-  product: {
-    pk: number;
-    slug: string;
-    name: string;
-    image: string;
-    img_alt: string;
-    price: number;
-    stock: number | undefined | null
-  };
-  quantity: number;
-  active: boolean;
-  sub_total: number;
-}
-
-interface IAnswerFromCart {
-  cartItem: ICartItem;
-  total: number;
-}
-
-interface ICart {
-  items: ICartItem[];
-  total: number | undefined;
-}
-
-const initialState: ICart = { items: [], total: 0 };
+const initialState: ICart = {
+  items: [],
+  customer: {
+    firstName: "",
+    lastName: "",
+    phone: "",
+    email: "",
+    address: "",
+  },
+  total: 0,
+};
 
 const cartSlice = createSlice({
   name: "cart",
@@ -34,7 +23,7 @@ const cartSlice = createSlice({
   reducers: {
     initialCart: (state, action: PayloadAction<ICart>) => action.payload,
     addProductToCart: (state, action: PayloadAction<IAnswerFromCart>) => {
-      state.items = state.items.map((item) => {
+      state.items = state.items?.map((item) => {
         if (item.pk === action.payload.cartItem.pk) {
           return action.payload.cartItem;
         } else {
@@ -48,7 +37,9 @@ const cartSlice = createSlice({
       action: PayloadAction<IAnswerFromCart>
     ) => {
       if (!action.payload.cartItem.product) {
-        state.items = state.items.filter((item) => item.pk !== action.payload.cartItem.pk);
+        state.items = state.items.filter(
+          (item) => item.pk !== action.payload.cartItem.pk
+        );
       } else {
         state.items = state.items.map((item) => {
           if (item.pk === action.payload.cartItem.pk) {
@@ -57,20 +48,26 @@ const cartSlice = createSlice({
             return item;
           }
         });
-      };
+      }
       state.total = action.payload.total;
     },
-    removeProductFromCart: (
-      state,
-      action: PayloadAction<IAnswerFromCart>
-    ) => {
-      state.items = state.items.filter((item) => item.product.pk !== action.payload.cartItem.pk);
+    removeProductFromCart: (state, action: PayloadAction<IAnswerFromCart>) => {
+      state.items = state.items.filter(
+        (item) => item.product.pk !== action.payload.cartItem.pk
+      );
       state.total = action.payload.total;
+    },
+    customerToCart: (state, action: PayloadAction<ICustomer>) => {
+      state.customer = action.payload;
     },
   },
 });
 
-export const { initialCart, addProductToCart, reduceOrDeleteProductCart, removeProductFromCart } =
-  cartSlice.actions;
+export const {
+  initialCart,
+  addProductToCart,
+  reduceOrDeleteProductCart,
+  removeProductFromCart,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

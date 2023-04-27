@@ -15,6 +15,7 @@ export const ReduceOrDeleteProductFromCart = (props: { productId: number }) => {
 
   return (
     <button
+      type="button"
       className="py-2 px-3 text-3xl hover:text-red-800"
       onClick={() => reduceOrDeleteProductFromCart()}
     >
@@ -30,6 +31,7 @@ export const AddProductToCart = (props: { productId: number }) => {
   };
   return (
     <button
+      type="button"
       className="py-2 px-3 text-3xl hover:text-cyan-500"
       onClick={() => addProductToCart()}
     >
@@ -45,6 +47,7 @@ export const RemoveProductFromCart = (props: { productId: number }) => {
   };
   return (
     <button
+      type="button"
       className="py-2 px-3 text-3xl hover:text-red-800"
       onClick={() => removeProductFromCart()}
     >
